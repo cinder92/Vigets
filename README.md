@@ -6,6 +6,7 @@ Desarrollado con Html, Css, y Javascript.
 Core : Electron 
 Lenguajes : Javascript
 Frameworks : Angular.js
+Manejador de base de datos : LocalForage
 
 Cuenta con los módulos de:
  - Registro de Usuarios
