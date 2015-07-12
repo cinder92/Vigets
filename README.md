@@ -3,10 +3,11 @@ Vigets es un CMS, hecho para Windows, Linux y Mac, el motivo de este desarrollo,
 
 Desarrollado con Html, Css, y Javascript.
 
-Core : Electron 
-Lenguajes : Javascript
-Frameworks : Angular.js
-Manejador de base de datos : LocalForage
+Core : <a href="https://github.com/mafintosh/electron-prebuilt" target="_blank">Electron</a>
+<br>
+Lenguajes : Javascript<br>
+Frameworks : <a href="https://angularjs.org/" target="_blank">Angular.js</a><br>
+Manejador de base de datos : LocalForage<br><br>
 
 Cuenta con los módulos de:
  - Registro de Usuarios
@@ -26,5 +27,6 @@ Cada uno de estos módulos incluye:
 <img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.00.30.png?w=650">
 <img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.01.36.png?w=650">
 
+Desarrollador : <a href="http://dantecervantes.com" target="_blank">Dante Cervantes</a> 
 
   
