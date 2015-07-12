@@ -1,0 +1,62 @@
+<div class="searchForm">
+
+<input type="search" ng-model="searchCat" class="search-input"
+  placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
+
+
+			  
+<!-- category form -->
+<div style="margin-top:1em; margin-bottom:1em;">
+	
+	<div class="row">
+		<div class="col">
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-model="showCategory">Agregar nueva categoría</ons-button>
+			<input ng-model="cat.catName" type="text" class="text-input text-input--underbar"
+			placeholder="Nombre" value="" required style="width:95%">
+			<input ng-model="cat.catID" type="hidden" required>
+			<button style="width:95%;margin-top:1em;" ng-click="cat.saveCat()" class="button " style="margin-left:25px;">Guardar categoría</button>
+		</div>
+		<div class="col">
+			<div class="listWrapper">
+				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
+					<thead>
+						<tr>
+							<th>Acciones</th>
+							<th ng-click="predicate = 'name'; reverse=false" colspan="2">Nombre</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="categoria in cat.categorias | filter : searchCat | startFrom : cat.currentPage*cat.pageSize | limitTo : cat.pageSize | orderBy:predicate:reverse" ng-click="cat.catDetails(categoria.id)">
+						<td ng-click="cat.delCat(categoria.id)">
+							<a href="#">
+								<i class="icon ion-close-circled"></i>
+							</a>
+						</td>
+						<td colspan="2">{{categoria.name}}</td>
+					</tr>
+					<tr>
+					
+						<td>
+							<button class="button button--quiet" ng-disabled="cat.currentPage == 0" ng-click="cat.currentPage=cat.currentPage-1">
+						       < Anterior
+						    </button>
+						</td>
+						<td>
+							 {{cat.currentPage+1}}/{{cat.numberOfPages()}}
+						</td>
+						<td>
+							<button class="button button--quiet" ng-disabled="cat.currentPage >= cat.categorias.length/cat.pageSize - 1" ng-click="cat.currentPage = cat.currentPage+1">
+						        Siguiente >
+						    </button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	
+
+</div>
+<!-- end category form -->
+	
+</div>

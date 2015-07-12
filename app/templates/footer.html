@@ -1,0 +1,22 @@
+
+<div class="overlay" ng-hide="!showOrder" ng-show="showOrder">
+	<div class="overlay-content center">
+		<h3 style="color:#fff; font-weight:100;">Nueva Orden</h3>
+		<form action="">
+			
+		</form>
+	</div>
+</div>
+
+<footer class="footer">
+	<div class="row">
+		<div class="col">
+			<p>{{ clock  | date:'medium'}}</p>
+		</div>
+		<div class="col">
+			<a ng-hide="!isLogin" ng-click="openOrder()" class="button order">
+				Nueva Orden
+			</a>
+		</div>
+	</div>
+</footer>

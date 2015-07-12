@@ -1,0 +1,61 @@
+<div class="navigation-bar">
+  <div class="navigation-bar__center navigation-bar__title" style="color:#ffffff; background-color:#1284ff;">Vigets</div> 
+</div>
+
+<div ng-hide="!isLogin">
+	<div class="tab-bar tab-bar--top tab-bar--top-border">
+	  <label ui-sref="app.dashboard" class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b" >
+	    <button  class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-heart"></i> Productos
+	    </button>
+	  </label>
+
+	  <label ui-sref="app.categorias" class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button  class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-pin"></i> Categorías
+	    </button>
+	  </label>
+
+	  <label class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-person"></i> Clientes
+	    </button>
+	  </label>
+
+	  <label class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-stats-bars"></i> Reportes
+	    </button>
+	  </label>
+
+	  <label class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-lock-combination"></i> Seguridad
+	    </button>
+	  </label>
+
+	  <label class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-gear-a"></i> Ajustes
+	    </button>
+	  </label>
+
+	  <label class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-android-exit"></i> Salir
+	    </button>
+	  </label>
+	</div>
+</div>
+
+<div class="view-animate-container">
+	<div ui-view class="view-animate" name="menuContent"></div>
+	<div ng-include="'app/templates/footer.html'"></div>
+</div>
