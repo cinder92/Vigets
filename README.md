@@ -27,5 +27,6 @@ Cada uno de estos módulos incluye:
 <img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.00.30.png?w=650">
 <img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.01.36.png?w=650">
 
+Desarrollador : <a href="http://dantecervantes.com" target="_blank">Dante Cervantes</a> 
 
   
