@@ -18,7 +18,7 @@
 	    </button>
 	  </label>
 
-	  <label class="tab-bar__item tab-bar--top-border__item">
+	  <label ui-sref="app.clientes" class="tab-bar__item tab-bar--top-border__item">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-person"></i> Clientes
@@ -55,7 +55,6 @@
 	</div>
 </div>
 
-<div class="view-animate-container">
-	<div ui-view class="view-animate" name="menuContent"></div>
-	<div ng-include="'app/templates/footer.html'"></div>
-</div>
+	<div ui-view  name="menuContent"></div>
+
+<div ng-include="'app/templates/footer.html'"></div>

@@ -1,0 +1,71 @@
+<div class="searchForm">
+	<input type="search" ng-model="searchCte" class="search-input"
+  		placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
+
+<div style="margin-top:1em; margin-bottom:1em;">
+	
+	<div class="row">
+		<div class="col">
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="clientes.cteID">Agregar nuevo cliente</ons-button>
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="!clientes.cteID" style="color:#1284ff">Editar {{clientes.cteName}}</ons-button>
+			<input ng-model="clientes.cteName" type="text" class="text-input text-input--underbar"
+			placeholder="Nombre" value="" required style="width:95%">
+			<input ng-model="clientes.cteAge" valid-date type="text" class="text-input text-input--underbar"
+			placeholder="Fecha de Nacimiento" value="" style="width:95%">
+			<input ng-model="clientes.cteEmail" type="email" class="text-input text-input--underbar"
+			placeholder="Email" value="" style="width:95%">
+			<input ng-model="clientes.ctePhone" type="tel" class="text-input text-input--underbar"
+			placeholder="Teléfono / Celular" value="" required style="width:95%">
+			<input ng-model="clientes.cteFacebook" type="text" class="text-input text-input--underbar"
+			placeholder="Facebook URL" value="" style="width:95%">
+			<input ng-model="clientes.cteTwitter" type="text" class="text-input text-input--underbar"
+			placeholder="Twitter URL" value="" style="width:95%">
+	
+			<input ng-model="clientes.cteID" type="hidden" required>
+			
+			<button style="width:95%;margin-top:1em;" ng-click="clientes.saveCte()" class="button " style="margin-left:25px;">Guardar cliente</button>
+
+		</div>
+
+		<div class="col">
+				
+				<div class="listWrapper">
+				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
+					<thead>
+						<tr>
+							<th>Acciones</th>
+							<th ng-click="predicate = 'name'; reverse=false" colspan="2">Nombre</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="cliente in clientes.ctes | filter : searchCte | startFrom : clientes.currentPage*clientes.pageSize | limitTo : clientes.pageSize | orderBy:predicate:reverse" ng-click="clientes.cteDetails(cliente.id)">
+						<td ng-click="clientes.delCte(cliente.id)">
+							<a href="#">
+								<i class="icon ion-close-circled"></i>
+							</a>
+						</td>
+						<td colspan="2">{{cliente.name}}</td>
+					</tr>
+					<tr>
+					
+						<td>
+							<button class="button button--quiet" ng-disabled="clientes.currentPage == 0" ng-click="clientes.currentPage=clientes.currentPage-1">
+						       < Anterior
+						    </button>
+						</td>
+						<td>
+							 {{clientes.currentPage+1}}/{{clientes.numberOfPages()}}
+						</td>
+						<td>
+							<button class="button button--quiet" ng-disabled="clientes.currentPage >= clientes.ctes.length/clientes.pageSize - 1" ng-click="clientes.currentPage = clientes.currentPage+1">
+						        Siguiente >
+						    </button>
+						</td>
+					</tr>
+				</table>
+
+		</div>
+	</div>
+
+</div>
+
+</div> <!--end search form -->

@@ -47,6 +47,46 @@ angular.module('Vigets',[
     }
   })
 
+  //categorias
+  $rootScope.db.createTable('clientes', {
+    "id":{
+      "type": "INTEGER",
+      "null": "NOT NULL", // default is "NULL" (if not defined)
+      "primary": true, // primary
+      "auto_increment": true // auto increment
+    },
+    "name":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "email":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "age":{
+      "type": "DATE_FORMAT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "phone":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "facebook":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "twitter":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    }
+  })
+
   $rootScope.isLogin = false;
 
   //clock
@@ -120,6 +160,16 @@ angular.module('Vigets',[
         templateUrl: "app/templates/categorias.html",
         controller: 'catController as cat'
         //controller: 'PlaylistsCtrl'
+      }
+    }
+  })
+
+  .state('app.clientes', {
+    url: "/clientes",
+    views: {
+      'menuContent': {
+        templateUrl: "app/templates/clientes.html",
+        controller: 'clientesCtrl as clientes'
       }
     }
   })
