@@ -46,7 +46,14 @@
 	    </button>
 	  </label>
 
-	  <label class="tab-bar__item tab-bar--top-border__item">
+	  <label ui-sref="app.usuarios" class="tab-bar__item tab-bar--top-border__item">
+	    <input type="radio" name="top-tab-bar-b">
+	    <button class="tab-bar__button tab-bar--top-border__button">
+	      <i class="icon ion-person"></i> Usuarios
+	    </button>
+	  </label>
+
+	  <label ng-click="init.logout();" class="tab-bar__item tab-bar--top-border__item">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-android-exit"></i> Salir

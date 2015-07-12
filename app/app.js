@@ -8,7 +8,7 @@ angular.module('Vigets',[
 .run(function($hotkey,$rootScope,$webSql,$timeout){
   $rootScope.db = $webSql.openDatabase('VigetsDB', '1.0', 'Databse', 2 * 1024 * 1024);
   //alert('e')
-  $rootScope.db.del("productos", {"id": 3})
+  //$rootScope.db.del("productos", {"id": 3})
   //tabla de productos
   $rootScope.db.createTable('productos', {
     "id":{
@@ -41,6 +41,64 @@ angular.module('Vigets',[
       "auto_increment": true // auto increment
     },
     "name":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    }
+  })
+
+  $rootScope.db.createTable('permisos', {
+    "id":{
+      "type": "INTEGER",
+      "null": "NOT NULL", // default is "NULL" (if not defined)
+      "primary": true, // primary
+      "auto_increment": true // auto increment
+    },
+    "name":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    }
+  })
+
+  $rootScope.db.createTable('usuarios_permisos', {
+    "id":{
+      "type": "INTEGER",
+      "null": "NOT NULL", // default is "NULL" (if not defined)
+      "primary": true, // primary
+      "auto_increment": true // auto increment
+    },
+    "usuario":{
+      "type": "INTEGER",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "permiso":{
+      "type": "INTEGER",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    }
+  })
+
+  //categorias
+  $rootScope.db.createTable('usuarios', {
+    "id":{
+      "type": "INTEGER",
+      "null": "NOT NULL", // default is "NULL" (if not defined)
+      "primary": true, // primary
+      "auto_increment": true // auto increment
+    },
+    "name":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "email":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "password":{
       "type": "TEXT",
       "null": "NOT NULL"
       //"default": "CURRENT_TIMESTAMP" // default value
@@ -170,6 +228,16 @@ angular.module('Vigets',[
       'menuContent': {
         templateUrl: "app/templates/clientes.html",
         controller: 'clientesCtrl as clientes'
+      }
+    }
+  })
+
+  .state('app.usuarios', {
+    url: "/usuarios",
+    views: {
+      'menuContent': {
+        templateUrl: "app/templates/usuarios.html",
+        controller: 'usuariosCtrl as usuarios'
       }
     }
   })
