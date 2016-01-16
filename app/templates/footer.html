@@ -1,8 +1,77 @@
-
 <div class="overlay" ng-hide="!showOrder" ng-show="showOrder">
 	<div class="overlay-content center">
-		<h3 style="color:#fff; font-weight:100;">Nueva Orden</h3>
-		
+		<h3 style="color:#fff; font-weight:100;">Generar nueva orden</h3>
+		<!--<div class="buscador-wrapper">
+			<div class="wrap">
+				<i class="icon ion-search"></i>
+				<input type="search" class="buscador" value="Buscar ..." onclick="this.value = ''" ng-model="filterProd">
+			</div>
+		</div>-->
+		<input type="search" ng-model="filterProd" class="search-input"
+  placeholder="Buscar producto ..." style="width: 100%; border-radius:0; height:40px;">
+		<div class="row">
+			<div class="col-65 left">
+				<ul class="list-prod with-border">
+					<li ng-repeat="prod in init.productos | filter : filterProd ">
+						<a href="#" ng-click="init.addToOrder(prod.id)">{{prod.name}} | {{prod.price | currency}}</a><span class="add"><i class="icon ion-checkmark-circled"></i></span></li>
+					</li>
+				</ul>
+
+				<!-- info del cliente -->
+				<div class="row">
+					<div class="col-100">
+						<h4 style="color:#fff; margin: 0 0 5px 0;">Asignar orden al cliente : </h4>
+						<input type="search" ng-keyup="init.searchClient(init.clientInput)" ng-model="init.clientInput" class="search-input"
+  placeholder="Ingrese teléfono" style="width: 100%; border-radius:0; height:40px;">			
+  				<div ng-show="init.showCreateNewClient">
+  				<h4 style="color:#fff; margin: 0 0 5px 0;">Crear nuevo cliente</h4>
+				<input type="text" placeholder="Nombre del cliente" class="text-input text-input--underbar" ng-model="init.newClientName" style="width: 100%; border-radius:0; height:40px;">
+				<input type="text" placeholder="Dirección" class="text-input text-input--underbar" ng-model="init.newClientAddress" style="width: 100%; border-radius:0; height:40px;">
+				</div>
+
+				<div ng-hide="init.clientInfo | isEmpty">
+					
+					<input type="hidden" ng-model="init.clientInfo.id">
+						<div class="row">
+							<div>
+							<p style="color:#fff"><strong>Nombre : {{init.clientInfo.name}}</strong></p>
+							<p style="color:#fff" ng-hide="init.clientInfo.email == '' || init.clientInfo.email == 'undefined'"><strong>Email : {{init.clientInfo.email}}</strong></p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-25 left" style="margin-top:1em:" ng-hide="init.clientInfo.facebook == 'undefined' || nit.clientInfo.facebook == ''">
+								<a href="{{init.clientInfo.facebook}}" class="btn facebook" target="_blank"><i class="icon ion-social-facebook"></i> Facebook</a>
+							</div>
+							<div class="col-25 left" style="margin-top:1em:" ng-hide="init.clientInfo.twitter == 'undefined' || nit.clientInfo.twitter == ''">
+								<a href="{{init.clientInfo.twitter}}" class="btn twitter" target="_blank"><i class="icon ion-social-twitter"></i> Twitter</a>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+				</div>
+
+					</div>
+				</div>
+				<!-- info del cliente -->
+
+			</div>
+			<div class="col-35 left">
+				<div class="orderWrap">
+					<h3 class="title">Orden</h3>
+					<ul class="list-prod other-height">
+						<li ng-repeat="prod in init.prodsInOrder"><a href="#">{{prod.name}} x {{prod.cant}}</a><span class="minus"><i class="icon ion-minus-circled"></i></span><span class="del"><i class="icon ion-close-circled"></i></span></li>
+					</ul>
+					<span class="total-price">Total : {{ init.totalPrice | currency}}</span>
+					<div class="col-50 left">
+						<a href="#" class="btn cobrar" ng-click="init.payNow()" analytics-on="click" analytics-event="Cobrar Orden" analytics-category="Comandos">Cobrar</a>
+					</div>
+					<div class="col-50 left">
+						<a href="#" class="btn cancelar" ng-click="init.cancelOrder();">Cancelar</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -12,7 +81,7 @@
 			<p>{{ clock  | date:'medium'}}</p>
 		</div>
 		<div class="col">
-			<a ng-hide="!isLogin" ng-click="openOrder()" class="button order">
+			<a ng-hide="!isLogin" ng-click="init.createNewOrder();" class="button order" analytics-on="click" analytics-event="Nueva Orden" analytics-category="Comandos">
 				Nueva Orden
 			</a>
 		</div>

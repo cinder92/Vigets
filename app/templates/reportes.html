@@ -1,0 +1,18 @@
+<div style="height:40px"></div>
+<div class="large-3 columns charts">
+	<canvas id="doughnut" class="chart chart-doughnut"
+	  chart-data="reportes.data" chart-colours="reportes.colors" chart-options="reportes.opts" chart-labels="reportes.labels">
+	</canvas>
+	<h3>Productos más vendidos</h3>
+</div>
+
+<div class="large-3 columns charts" style="margin-top:73px">
+	<h1>{{reportes.mayor_comprador_name}}</h1>
+	<h4 style="color:#E64C65;">Tel: {{reportes.mayor_comprador_tel}}</h4>
+	<h3>Mayor comprador</h3>
+</div>
+
+<div class="large-3 columns charts" style="margin-top:118px">
+	<h1>$ </h1><h1 count-to="{{reportes.ganancias_hoy}}" value="0" duration="4"></h1>
+	<h3>Ganancias de Hoy</h3>
+</div>

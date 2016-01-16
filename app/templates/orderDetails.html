@@ -1,0 +1,29 @@
+<div class="overlay">
+	<div class="overlay-content center details">
+		<h3>Detalles de la orden #{{orden.orderId}} | Total : {{orden.orderTotalPrice | currency}}</h3>
+		
+		<div class="listWrapper">
+
+				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
+					<thead>
+						<tr>
+							<th>Producto</th>
+							<th>Precio individual</th>
+							<th>Cantidad adquirida</th>
+							<th>Precio Total</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="producto in orden.productsInOder">
+						<td>{{producto.name}}</td>
+						<td>{{producto.price | currency}}</td>
+						<td>x {{producto.cant}}</td>
+						<td>{{producto.cant * producto.price | currency}}</td>
+					</tr>
+
+				</table>
+
+		</div>
+
+		<a href="#" ng-click="orden.detailsPopup = false" class="btn cancelar">Cerrar</a>
+	</div>
+</div>

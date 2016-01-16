@@ -1,28 +1,28 @@
 <div class="searchForm">
-	<input type="search" ng-model="searchCte" class="search-input"
-  		placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
 
 <div style="margin-top:1em; margin-bottom:1em;">
 	
 	<div class="row">
 		<div class="col">
-			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="usuarios.userID">Agregar nuevo usuario</ons-button>
-			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="!usuarios.userID" style="color:#1284ff">Editar {{usuarios.userName}}</ons-button>
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" style="color:#fff" ng-hide="usuarios.userID">Agregar nuevo usuario</ons-button>
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="!usuarios.userID" style="color:#fff">Editar {{usuarios.userName}}</ons-button>
 			<input ng-model="usuarios.userName" type="text" class="text-input text-input--underbar"
-			placeholder="Nombre" value="" required style="width:95%">
+			placeholder="Nombre" value="" required style="width:95%;margin-bottom:1em">
 			<input ng-model="usuarios.userEmail" type="email" class="text-input text-input--underbar"
-			placeholder="Email" value="" style="width:95%">
+			placeholder="Email" value="" style="width:95%;margin-bottom:1em">
 			<input ng-model="usuarios.userPass" type="password" class="text-input text-input--underbar"
-			placeholder="Password" value="" style="width:95%">
+			placeholder="Password" value="" style="width:95%;margin-bottom:1em">
 	
 			<input ng-model="usuarios.userID" type="hidden" required>
 			
-			<button style="width:95%;margin-top:1em;" ng-click="usuarios.saveUser()" class="button " style="margin-left:25px;">Guardar usuario</button>
+			<button style="width:93.5%;padding:4px 10px !important;" ng-click="usuarios.saveUser()" class="button btn actionButton " style="margin-left:25px;" analytics-on="click" analytics-event="Guardar Usuarios" analytics-category="Comandos">Guardar usuario</button>
 
 		</div>
 
 		<div class="col">
-				
+				<input type="search" ng-model="searchCte" class="search-input"
+  		placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
+
 				<div class="listWrapper">
 				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
 					<thead>
@@ -32,7 +32,7 @@
 						</tr>
 					</thead>
 					<tr ng-repeat="usr in usuarios.users | filter : searchCte | startFrom : usuarios.currentPage*usuarios.pageSize | limitTo : usuarios.pageSize | orderBy:predicate:reverse" ng-click="usuarios.userDetails(usr.id)">
-						<td ng-click="usuarios.delUser(usr.id)">
+						<td ng-click="usuarios.delUser(usr.id)" analytics-on="click" analytics-event="Eliminar Usuarios" analytics-category="Comandos">
 							<a href="#">
 								<i class="icon ion-close-circled"></i>
 							</a>

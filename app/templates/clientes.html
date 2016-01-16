@@ -1,34 +1,39 @@
 <div class="searchForm">
-	<input type="search" ng-model="searchCte" class="search-input"
-  		placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
 
 <div style="margin-top:1em; margin-bottom:1em;">
 	
 	<div class="row">
 		<div class="col">
-			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="clientes.cteID">Agregar nuevo cliente</ons-button>
-			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="!clientes.cteID" style="color:#1284ff">Editar {{clientes.cteName}}</ons-button>
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" style="color:#fff" ng-hide="clientes.cteID">Agregar nuevo cliente</ons-button>
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-hide="!clientes.cteID" style="color:#fff">Editar {{clientes.cteName}}</ons-button>
 			<input ng-model="clientes.cteName" type="text" class="text-input text-input--underbar"
-			placeholder="Nombre" value="" required style="width:95%">
-			<input ng-model="clientes.cteAge" valid-date type="text" class="text-input text-input--underbar"
-			placeholder="Fecha de Nacimiento" value="" style="width:95%">
-			<input ng-model="clientes.cteEmail" type="email" class="text-input text-input--underbar"
-			placeholder="Email" value="" style="width:95%">
+			placeholder="Nombre" value="" required style="width:95%;margin-bottom:1em;">
 			<input ng-model="clientes.ctePhone" type="tel" class="text-input text-input--underbar"
-			placeholder="Teléfono / Celular" value="" required style="width:95%">
+			placeholder="Teléfono / Celular" value="" required style="width:95%;margin-bottom:1em;">
+			<input ng-model="clientes.cteDir" type="text" class="text-input text-input--underbar"
+			placeholder="Dirección" value="" required style="width:95%;margin-bottom:1em;">
+			<!--<input ng-model="clientes.cteAge" valid-date type="text" class="text-input text-input--underbar"
+			placeholder="Fecha de Nacimiento (MM/dd/yyyy)" value="" style="width:95%;margin-bottom:1em;">
+			-->
+			<datepicker button-prev="<i class='icon ion-chevron-left'></i>" button-next="<i class='icon ion-chevron-right'></i>" date-format="MM/dd/yyyy">
+			  <input ng-model="clientes.cteAge"  class="text-input text-input--underbar" placeholder="Fecha de Nacimiento" type="text" value="" style="width:95%;margin-bottom:1em;"/>
+			</datepicker>
+			<input ng-model="clientes.cteEmail" type="email" class="text-input text-input--underbar"
+			placeholder="Email" value="" style="width:95%;margin-bottom:1em;">
 			<input ng-model="clientes.cteFacebook" type="text" class="text-input text-input--underbar"
-			placeholder="Facebook URL" value="" style="width:95%">
+			placeholder="Facebook URL" value="" style="width:95%;margin-bottom:1em;">
 			<input ng-model="clientes.cteTwitter" type="text" class="text-input text-input--underbar"
-			placeholder="Twitter URL" value="" style="width:95%">
+			placeholder="Twitter URL" value="" style="width:95%;margin-bottom:1em;">
 	
 			<input ng-model="clientes.cteID" type="hidden" required>
 			
-			<button style="width:95%;margin-top:1em;" ng-click="clientes.saveCte()" class="button " style="margin-left:25px;">Guardar cliente</button>
+			<button style="width:93.5%;padding:4px 10px !important" ng-click="clientes.saveCte()" class="button btn actionButton" style="margin-left:25px;" analytics-on="click" analytics-event="Guardar Cliente" analytics-category="Comandos">Guardar cliente</button>
 
 		</div>
 
 		<div class="col">
-				
+				<input type="search" ng-model="searchCte" class="search-input"
+  		placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
 				<div class="listWrapper">
 				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
 					<thead>
@@ -38,7 +43,7 @@
 						</tr>
 					</thead>
 					<tr ng-repeat="cliente in clientes.ctes | filter : searchCte | startFrom : clientes.currentPage*clientes.pageSize | limitTo : clientes.pageSize | orderBy:predicate:reverse" ng-click="clientes.cteDetails(cliente.id)">
-						<td ng-click="clientes.delCte(cliente.id)">
+						<td ng-click="clientes.delCte(cliente.id)" analytics-on="click" analytics-event="Eliminar Cliente" analytics-category="Comandos">
 							<a href="#">
 								<i class="icon ion-close-circled"></i>
 							</a>

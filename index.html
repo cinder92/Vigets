@@ -2,27 +2,55 @@
 <html ng-app="Vigets">
   <head>
     <title>Vigets</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="app/css/onsenui.css">
     <link rel="stylesheet" href="app/css/darkonsen.css">
     <link rel="stylesheet" href="app/css/app.css">
+    <link rel="stylesheet" href="app/css/angular-chart.css">
+    <link rel="stylesheet" href="app/css/angular-datepicker.min.css">
+    <link rel="stylesheet" href="app/css/sweetalert.css">
   </head>
   <body>
-   
+
+<script type="text/javascript" src="app/js/libs/lodash.js"></script> 
+<script type="text/javascript" src="app/js/libs/sweetalert.min.js"></script>   
 <script type="text/javascript" src="app/js/libs/moment.js"></script>
+<script type="text/javascript" src="app/js/libs/charts.js"></script>
 <script type="text/javascript" src="app/js/angular.js"></script>
+<script type="text/javascript" src="app/js/libs/cont.to.js"></script>
+<script type="text/javascript" src="app/js/libs/angular-chart.min.js"></script>
+<script type="text/javascript" src="app/js/libs/angular-datepicker.min.js"></script>
+<script type="text/javascript" src="app/js/libs/angular.sweetalert.min.js"></script> 
+<script type="text/javascript" src="app/js/libs/angulartics.min.js"></script>
+<script type="text/javascript" src="app/js/libs/angulartics.ga.js"></script>
 <script type="text/javascript" src="app/js/libs/angular.websql.min.js"></script>
 <script type="text/javascript" src="app/js/libs/angular.ui.router.min.js"></script>
 <script type="text/javascript" src="app/app.js"></script>
 <script type="text/javascript" src="app/filters/startFrom.js"></script>
+<script type="text/javascript" src="app/filters/isEmpty.js"></script>
+<script type="text/javascript" src="app/filters/inputFile.js"></script>
+<script type="text/javascript" src="app/filters/orderDatefilter.js"></script>
+<script type="text/javascript" src="app/controllers/ordersCtrl.js"></script>
 <script type="text/javascript" src="app/controllers/initController.js"></script>
+<script type="text/javascript" src="app/controllers/backUpCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/settingsCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/printersCtrl.js"></script>
 <script type="text/javascript" src="app/controllers/dashController.js"></script>
 <script type="text/javascript" src="app/controllers/catController.js"></script>
 <script type="text/javascript" src="app/controllers/clientesCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/reportesCtrl.js"></script>
 <script type="text/javascript" src="app/controllers/userCtrl.js"></script>
 <script type="text/javascript" src="app/directives/hotkeys.js"></script>
 <script type="text/javascript" src="app/directives/validDate.js"></script>
-     
-	<div ui-view ng-animate="{enter: 'enter', leave: 'leave'}"></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72368000-1', { 'cookieDomain': 'none' });
+</script>
 
+<!--<webview src="https://github.com" partition="persist:github"></webview>-->
+	<div ui-view ng-animate="{enter: 'enter', leave: 'leave'}"></div>
   </body>
 </html>

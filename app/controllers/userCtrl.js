@@ -5,13 +5,15 @@
 	usuariosCtrl.$inject = [
 		'$rootScope',
 		'$state',
-		'$webSql'
+		'$webSql',
+		'SweetAlert'
 	]
 
 	function usuariosCtrl(
 		$rootScope,
 		$state,
-		$webSql
+		$webSql,
+		SweetAlert
 	){
 		var vm = this;
 
@@ -85,7 +87,12 @@
 			    vm.getAllUsers()
 
 			}else{
-				alert('Por favor escriba el nombre, email y password del usuario')
+				SweetAlert.swal({
+					 title : "Oops!",
+					 text: 'Por favor escriba el nombre / email / password',
+					 type: "warning"
+				})
+				//alert('Por favor escriba el nombre, email y password del usuario')
 			}
 		}
 
@@ -93,18 +100,30 @@
 			//console.log(index)
 			
 			if(index != undefined && index > 0 && index != "" && index != null){
-				var conf = confirm('Deseas eliminar este usuario?')
-
-				if(conf){
-					
-				    vm.userName = "";
-					vm.userEmail = "";
-					vm.userPass = "";
-					vm.userID = "";
-					$rootScope.db.del("usuarios", {"id": index})
-					 vm.getAllUsers()
-				}
 				
+				SweetAlert.swal({
+				   title: "Aviso",
+				   text: "¿Deseas eliminar este usuario?",
+				   type: "warning",
+				   showCancelButton: true,
+				   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
+				   cancelButtonText: "Cancelar",
+				   closeOnConfirm: false,
+				   closeOnCancel: false }, 
+				function(isConfirm){ 
+				   if (isConfirm) {
+					   	vm.userName = "";
+						vm.userEmail = "";
+						vm.userPass = "";
+						vm.userID = "";
+						$rootScope.db.del("usuarios", {"id": index})
+					 	vm.getAllUsers()
+				      SweetAlert.swal("¡Borrado!", "El usuario ha sido eliminado", "success");
+				   } else {
+				      SweetAlert.swal("Cancelado", "El usuario no ha sido eliminado", "error");
+				   }
+				});
+
 			}
 		}
 

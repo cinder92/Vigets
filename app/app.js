@@ -1,14 +1,63 @@
+var remote = require('remote'); 
+var BrowserWindow = remote.require('browser-window'); 
+/*var notifier = require('node-notifier');
+notifier.notify({
+  'title': 'My notification',
+  'message': 'Hello, there!',
+  'sound' : 'Glass'
+});*/
+
 angular.module('Vigets',[
 	'ui.router',
 	//'LocalForageModule',
   'angular-websql',
-  'drahak.hotkeys'
+  'drahak.hotkeys',
+  'chart.js',
+  'countTo',
+  'angulartics',
+  'angulartics.google.analytics',
+  '720kb.datepicker',
+  'oitozero.ngSweetAlert',
+  'ng-file-model'
 ])
 
-.run(function($hotkey,$rootScope,$webSql,$timeout){
+.run(function($rootScope,$webSql,$timeout){
+
   $rootScope.db = $webSql.openDatabase('VigetsDB', '1.0', 'Databse', 2 * 1024 * 1024);
   //alert('e')
   //$rootScope.db.del("productos", {"id": 3})
+  //tabla de orden
+  /*$rootScope.db.dropTable('clientes')
+  $rootScope.db.dropTable('ordenes')
+  $rootScope.db.dropTable('reportes')
+  $rootScope.db.dropTable('productos')
+  $rootScope.db.dropTable('categorias')*/
+  $rootScope.db.createTable('ordenes', {
+    "id":{
+      "type": "INTEGER",
+      "null": "NOT NULL", // default is "NULL" (if not defined)
+      "primary": true, // primary
+      "auto_increment": true // auto increment
+    },
+    "client_id":{
+      "type": "INTEGER",
+      "null": "NOT NULL"
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
+    "date":{
+      "type": "DATE_FORMAT",
+      "null": "NOT NULL"
+    },
+    "productos": {
+      "type": "TEXT",
+      "null": "NOT NULL"
+    },
+    "total" : {
+      "type" : "INTEGER",
+      "null" : "NOT NULL"
+    }
+  })
+
   //tabla de productos
   $rootScope.db.createTable('productos', {
     "id":{
@@ -118,14 +167,17 @@ angular.module('Vigets',[
       "null": "NOT NULL"
       //"default": "CURRENT_TIMESTAMP" // default value
     },
-    "email":{
+    "direccion":{
       "type": "TEXT",
       "null": "NOT NULL"
       //"default": "CURRENT_TIMESTAMP" // default value
     },
+    "email":{
+      "type": "TEXT",
+      //"default": "CURRENT_TIMESTAMP" // default value
+    },
     "age":{
       "type": "DATE_FORMAT",
-      "null": "NOT NULL"
       //"default": "CURRENT_TIMESTAMP" // default value
     },
     "phone":{
@@ -134,13 +186,11 @@ angular.module('Vigets',[
       //"default": "CURRENT_TIMESTAMP" // default value
     },
     "facebook":{
-      "type": "TEXT",
-      "null": "NOT NULL"
+      "type": "TEXT"
       //"default": "CURRENT_TIMESTAMP" // default value
     },
     "twitter":{
-      "type": "TEXT",
-      "null": "NOT NULL"
+      "type": "TEXT"
       //"default": "CURRENT_TIMESTAMP" // default value
     }
   })
@@ -160,28 +210,31 @@ angular.module('Vigets',[
   $timeout(tick, $rootScope.tickInterval);
 
   $rootScope.showOrder = false;
-  var pic = 1;
-  $hotkey.bind('Ctrl + N', function(event) {
-       //lanzar pedido desde cualquier lado
-       
-       if(pic == 1){
-         $rootScope.showOrder = true;
-         pic = 2
-         console.log(pic)
-       }else{
-         if(pic == 2){
-          $rootScope.showOrder = false;
-          pic = 1
-           console.log(pic)
-         }
-         
-       }
-       
-  })
+
+  //buttons     
+  $rootScope.min = function(){
+    var window = BrowserWindow.getFocusedWindow();
+    window.minimize();
+  }
+
+  $rootScope.max = function(){
+    var window = BrowserWindow.getFocusedWindow();
+    window.maximize();
+  }
+
+  $rootScope.close = function(){
+    var window = BrowserWindow.getFocusedWindow();
+    window.close();
+  }
+  
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $analyticsProvider) {
 
+  //analytics
+  // turn off automatic tracking
+  $analyticsProvider.virtualPageviews(false);
+  
   $stateProvider
 
   .state('app', {
@@ -201,7 +254,7 @@ angular.module('Vigets',[
   })
 
   .state('app.dashboard', {
-    url: "/dashboard",
+    url: "/dashboard:empty",
     views: {
       'menuContent': {
         templateUrl: "app/templates/dashboard.html",
@@ -212,7 +265,7 @@ angular.module('Vigets',[
   })
 
   .state('app.categorias', {
-    url: "/categorias",
+    url: "/categorias:empty",
     views: {
       'menuContent': {
         templateUrl: "app/templates/categorias.html",
@@ -238,6 +291,67 @@ angular.module('Vigets',[
       'menuContent': {
         templateUrl: "app/templates/usuarios.html",
         controller: 'usuariosCtrl as usuarios'
+      }
+    }
+  })
+
+  .state('app.ordenes', {
+    url: "/ordenes",
+    views: {
+      'menuContent': {
+        templateUrl: "app/templates/ordenes.html",
+        controller: 'ordersCtrl as orden'
+      }
+    }
+  })
+
+  .state('app.settings', {
+    url: "/settings",
+    views: {
+      'menuContent': {
+        templateUrl: "app/templates/settings.html"
+      }
+    }
+  })
+
+  .state('app.settings.general',{
+    url : '/settings/general',
+    views : {
+      'settingsWrapper':{
+        templateUrl : 'app/templates/settings-general.html',
+        controller: 'settingsCtrl as settings'
+      }
+    }
+  })
+
+  .state('app.settings.printers',{
+    url : '/settings/printers',
+    views : {
+      'settingsWrapper':{
+        templateUrl : 'app/templates/settings-printers.html',
+        controller: 'printersCtrl as printers'
+      }
+    }
+  })
+
+  .state('app.settings.backup',{
+    url : '/settings/backup',
+    views : {
+      'settingsWrapper':{
+        templateUrl : 'app/templates/settings-backup.html',
+        controller: 'backUpCtrl as backup'
+      }
+    }
+  })
+
+  
+
+  .state('app.reportes', {
+    url: "/reportes",
+    views: {
+      'menuContent': {
+        templateUrl: "app/templates/reportes.html",
+        controller: 'reportesCtrl as reportes'
       }
     }
   })

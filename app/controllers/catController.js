@@ -4,13 +4,17 @@
 	catController.$inject = [
 		'$rootScope',
 		'$state',
-		'$webSql'
+		'$webSql',
+		'$stateParams',
+		'SweetAlert'
 	]
 
 	function catController(
 		$rootScope,
 		$state,
-		$webSql
+		$webSql,
+		$stateParams,
+		SweetAlert
 	){
 		var vm = this;
 
@@ -18,6 +22,12 @@
 		vm.catID;
 		vm.pageSize = 5;
 		vm.currentPage = 0;
+
+		 var empty = $stateParams.empty
+
+	    if(empty == "true"){
+	    	SweetAlert.swal("Por favor agrega una categoría");
+	    }
 
 		vm.getAllCats = function(){
 			vm.categorias = [];
@@ -78,7 +88,12 @@
 				
 
 			}else{
-				alert('Llene todos los campos')
+				SweetAlert.swal({
+					 title : "Oops!",
+					 text: 'Por favor llene todos los campos',
+					 type: "warning"
+				})
+				//alert('Llene todos los campos')
 			}
 		}
 
@@ -86,16 +101,27 @@
 			//console.log(index)
 			
 			if(index != undefined && index > 0 && index != "" && index != null){
-				var conf = confirm('Deseas eliminar esta categoría?')
 
-				if(conf){
-					
-				    vm.catName = ''
-				   
-				    vm.catID = ''
-					$rootScope.db.del("categorias", {"id": index})
-					vm.getAllCats()
-				}
+				SweetAlert.swal({
+				   title: "Aviso",
+				   text: "¿Deseas eliminar esta categoría?",
+				   type: "warning",
+				   showCancelButton: true,
+				   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
+				   cancelButtonText: "Cancelar",
+				   closeOnConfirm: false,
+				   closeOnCancel: false }, 
+				function(isConfirm){ 
+				   if (isConfirm) {
+					   	vm.catName = ''
+					    vm.catID = ''
+						$rootScope.db.del("categorias", {"id": index})
+						vm.getAllCats()
+				      SweetAlert.swal("¡Borrado!", "La categoría ha sido eliminada", "success");
+				   } else {
+				      SweetAlert.swal("Cancelado", "La categoría no ha sido eliminada", "error");
+				   }
+				});
 				
 			}
 		}

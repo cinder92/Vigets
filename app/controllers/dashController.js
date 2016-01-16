@@ -5,14 +5,18 @@
 		//'$localForage',
 		'$rootScope',
 		'$state',
-		'$webSql'
+		'$webSql',
+		'$stateParams',
+		'SweetAlert'
 	]
 
 	function dashController(
 		//$localForage,
 		$rootScope,
 		$state,
-		$webSql
+		$webSql,
+		$stateParams,
+		SweetAlert
 	){
 		var vm = this;
 
@@ -23,6 +27,12 @@
 
 		vm.currentPage = 0;
 	    vm.pageSize = 5;
+
+	    var empty = $stateParams.empty
+
+	    if(empty == "true"){
+	    	SweetAlert.swal("Por favor agrega un producto");
+	    }
 
 		vm.getAllProds = function(){
 			vm.productos = [];
@@ -100,7 +110,12 @@
 				
 
 			}else{
-				alert('Llene todos los campos')
+				SweetAlert.swal({
+					 title : "Oops!",
+					 text: 'Por favor llene todos los campos',
+					 type: "warning"
+				})
+				//alert('Llene todos los campos')
 			}
 		}
 
@@ -108,16 +123,29 @@
 			//console.log(index)
 			
 			if(index != undefined && index > 0 && index != "" && index != null){
-				var conf = confirm('Deseas eliminar este producto?')
 
-				if(conf){
-					vm.prodCat = ''
-				    vm.prodName = ''
-				    vm.prodPrice = ''
-				    vm.prodID = ''
-					$rootScope.db.del("productos", {"id": index})
-					vm.getAllProds()
-				}
+				SweetAlert.swal({
+				   title: "Aviso",
+				   text: "¿Deseas eliminar este producto?",
+				   type: "warning",
+				   showCancelButton: true,
+				   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
+				   cancelButtonText: "Cancelar",
+				   closeOnConfirm: false,
+				   closeOnCancel: false }, 
+				function(isConfirm){ 
+				   if (isConfirm) {
+					   	vm.prodCat = ''
+					    vm.prodName = ''
+					    vm.prodPrice = ''
+					    vm.prodID = ''
+						$rootScope.db.del("productos", {"id": index})
+						vm.getAllProds()
+				      SweetAlert.swal("¡Borrado!", "El producto ha sido eliminado", "success");
+				   } else {
+				      SweetAlert.swal("Cancelado", "El producto no ha sido eliminado", "error");
+				   }
+				});
 				
 			}
 		}

@@ -1,5 +1,12 @@
 {
-  "name"    : "Vigets",
-  "version" : "0.0.1",
-  "main"    : "main.js"
+  "name": "Vigets",
+  "version": "0.0.1",
+  "main": "main.js",
+  "dependencies": {
+    "node-notifier": "^4.4.0",
+    "node-printer": "^0.2.1"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.1.1"
+  }
 }

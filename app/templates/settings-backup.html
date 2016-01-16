@@ -1,0 +1,19 @@
+<div class="settings-menu">
+	<h1 class="settings-title">Respaldos</h1>
+	<ul class="menu">
+		<li>
+			<i class="icon ion-soup-can"></i> ¿Respaldar base de datos automáticamente?
+		</li>
+		<li><i class="icon ion-alert-circled"></i> ¿Avisar cuando un producto esté bajo de stock?</li>
+		<li><i class="icon ion-heart"></i> ¿Notificar cumpleaños de clientes?</li>
+		<li><i class="icon ion-lock-combination"></i> ¿Iniciar sesión automáticamente?</li>
+	</ul>
+	<a href="#" ng-click="backup.exportDatabase()" style="margin:10px 10px 0 0; float:left;" class="btn grayButton col-25">
+		<span ng-show="backup.exportLoading" ng-include="'app/templates/spinner.html'"></span>
+		<i class="icon ion-reply"></i> Exportar ahora
+	</a>
+	<a href="#" ng-click="backup.importDatabase()" style="margin:10px 10px 0 0; float:left;" class="btn grayButton col-25">
+		<span ng-show="backup.importLoading" ng-include="'app/templates/spinner.html'"></span>
+	    <i class="icon ion-forward"></i> Importar ahora</a>
+	    <input type="file" ng-file-model="backup.importFile" style="margin-top:20px;float:left;width:20%;">
+</div>

@@ -1,0 +1,9 @@
+<div class="settings-menu">
+	<h1 class="settings-title">Impresoras</h1>
+	<ul class="menu">
+		<li ng-repeat="printer in printers.printersList" ng-click="printers.setAsDefault(printer.id)">
+			<i class="icon ion-checkmark-round" ng-show="printer.default" ng-class="{'default' : printer.default}"></i>
+			<i class="icon ion-printer"></i> {{printer.name}}  
+		</li>
+	</ul>
+</div>

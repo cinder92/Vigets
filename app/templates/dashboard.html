@@ -1,12 +1,10 @@
 <div class="searchForm">
-	<input type="search" ng-model="searchProd" class="search-input"
-  placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
 
 	<div class="row">
 		<div class="col">
 			<div class="addnew">
-		  	  <h4 style="color:#1284ff" ng-hide="dash.prodID">Añadir nuevo producto</h4>
-		  	  <h4 ng-hide="!dash.prodID" style="color:#1284ff">Editar {{dash.prodName}}</h4>
+		  	  <h4 style="color:#fff" ng-hide="dash.prodID">Añadir nuevo producto</h4>
+		  	  <h4 ng-hide="!dash.prodID" style="color:#fff">Editar {{dash.prodName}}</h4>
 		  	  <!-- id prod -->
 		  	  <input type="hidden" ng-model="dash.prodID">
 		  	  <div style="margin-bottom:1em;">
@@ -20,18 +18,17 @@
 			  <div style="margin-bottom:1em;">
 			  <select class="text-input text-input--underbar" ng-model="dash.prodCat" required style="width:95%">
 			  <option value="">- Elija una categoría -</option>
-				<!--<option value="Bebidas">Bebidas</option>
-				<option value="Desayunos">Desayunos</option>
-				<option value="Cenas">Cenas</option>
-				<option value="Postres">Postres</option>-->
 				<option ng-repeat="cat in dash.categorias | orderBy : name" value="{{cat.name}}">{{cat.name}}</option>
 			  </select>
 			  
 			  </div>
-			  <button style="width:95%;margin-top:1em;" ng-click="dash.saveProd()" class="button " style="margin-left:25px;">Guardar producto</button>
+			  <button style="width:93.5%;margin-top:1em;padding:4px 10px !important" ng-click="dash.saveProd()" class="button btn actionButton" style="margin-left:25px;" analytics-on="click" analytics-event="Guardar Producto" analytics-category="Comandos">Guardar producto</button>
 		  	</div>
 		</div>
 		<div class="col">
+		<input type="search" ng-model="searchProd" class="search-input"
+  placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
+
 			<div class="listWrapper">
 				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
 					<thead>
@@ -43,7 +40,7 @@
 						</tr>
 					</thead>
 					<tr ng-repeat="producto in dash.productos | filter : searchProd | startFrom : dash.currentPage*dash.pageSize | limitTo : dash.pageSize | orderBy:predicate:reverse" ng-click="dash.prodDetails(producto.id)">
-						<td ng-click="dash.delProd(producto.id)">
+						<td ng-click="dash.delProd(producto.id)" analytics-on="click" analytics-event="Borrar Producto" analytics-category="Comandos">
 							<a href="#">
 								<i class="icon ion-close-circled"></i>
 							</a>
@@ -55,7 +52,7 @@
 					<tr>
 					<td></td>
 						<td>
-							<button class="button button--quiet" ng-disabled="dash.currentPage == 0" ng-click="dash.currentPage=dash.currentPage-1">
+							<button class="button navigation button--quiet" ng-disabled="dash.currentPage == 0" ng-click="dash.currentPage=dash.currentPage-1">
 						       < Anterior
 						    </button>
 						</td>
@@ -63,7 +60,7 @@
 							 {{dash.currentPage+1}}/{{dash.numberOfPages()}}
 						</td>
 						<td>
-							<button class="button button--quiet" ng-disabled="dash.currentPage >= dash.productos.length/dash.pageSize - 1" ng-click="dash.currentPage = dash.currentPage+1">
+							<button class="button navigation button--quiet" ng-disabled="dash.currentPage >= dash.productos.length/dash.pageSize - 1" ng-click="dash.currentPage = dash.currentPage+1">
 						        Siguiente >
 						    </button>
 						</td>

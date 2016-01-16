@@ -1,22 +1,20 @@
 <div class="searchForm">
 
-<input type="search" ng-model="searchCat" class="search-input"
-  placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
-
-
-			  
 <!-- category form -->
 <div style="margin-top:1em; margin-bottom:1em;">
 	
 	<div class="row">
 		<div class="col">
-			<ons-button modifier="quiet" class="forgot-password button button--quiet" ng-model="showCategory">Agregar nueva categoría</ons-button>
+			<ons-button modifier="quiet" class="forgot-password button button--quiet" style="color:#fff" ng-model="showCategory">Agregar nueva categoría</ons-button>
 			<input ng-model="cat.catName" type="text" class="text-input text-input--underbar"
-			placeholder="Nombre" value="" required style="width:95%">
+			placeholder="Nombre" value="" required style="width:95%;margin-bottom:1em;">
 			<input ng-model="cat.catID" type="hidden" required>
-			<button style="width:95%;margin-top:1em;" ng-click="cat.saveCat()" class="button " style="margin-left:25px;">Guardar categoría</button>
+			<button style="width:93.5%;padding:4px 10px !important" ng-click="cat.saveCat()" class="button btn actionButton" style="margin-left:25px;" analytics-on="click" analytics-event="Guardar Categoria" analytics-category="Comandos">Guardar categoría</button>
 		</div>
 		<div class="col">
+		<input type="search" ng-model="searchCat" class="search-input"
+  placeholder="Buscar..." style="width: 100%; border-radius:0; height:40px;">
+
 			<div class="listWrapper">
 				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
 					<thead>

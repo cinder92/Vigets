@@ -1,0 +1,61 @@
+<div class="searchForm">
+	<div style="display:inline;display: inline;float: left;width: 48%;">
+		<input type="search" class="search-input"
+  		placeholder="Buscar..." ng-model="searchOrden" style="width: 100%; border-radius:0; height:40px;">
+	</div>
+	<div style="display:inline;float: left;margin: -4px 0 0 10px;width: 50%;">
+		<datepicker button-prev="<i class='icon ion-chevron-left'></i>" button-next="<i class='icon ion-chevron-right'></i>" date-format="dd/M/yyyy">
+		  <input ng-model="filterDate"  class="text-input text-input--underbar" placeholder="Fecha" type="text" value="" style="width: 100%; border-radius:0; height:40px;"/>
+		</datepicker>
+	</div>
+	
+
+<div style="margin-top:1em; margin-bottom:1em;">
+	
+	<div class="row">
+
+		<div class="col">
+				
+				<div class="listWrapper">
+
+				<table class="listaTabla" cellpadding="0" cellspacing="0" style="width:100%">
+					<thead>
+						<tr>
+							<th>Cliente</th>
+							<th>Fecha</th>
+							<th>Detalles</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="ordenes in orden.ordersList | startFrom : orden.currentPage*orden.pageSize | limitTo : orden.pageSize | filter : searchOrden | orderDate:filterDate">
+						<td>{{ordenes.name}}</td>
+						<td>{{ordenes.date}}</td>
+						<td><a href="#" ng-click="orden.viewDetails(ordenes.id)" class="orderDetails" analytics-on="click" analytics-event="Detalles de la Orden" analytics-category="Comandos">Ver detalles <i class="icon ion-eye"></i></a></td>
+						<td>{{ordenes.total | currency}}</td>
+					</tr>
+					<tr>
+					
+						<td>
+							<button class="button button--quiet" ng-disabled="orden.currentPage == 0" ng-click="orden.currentPage=orden.currentPage-1">
+						       < Anterior
+						    </button>
+						</td>
+						<td>
+							 {{orden.currentPage+1}}/{{orden.numberOfPages()}}
+						</td>
+						<td>
+							<button class="button button--quiet" ng-disabled="orden.currentPage >= orden.ordersList.length/orden.pageSize - 1" ng-click="orden.currentPage = orden.currentPage+1">
+						        Siguiente >
+						    </button>
+						</td>
+					</tr>
+				</table>
+
+		</div>
+	</div>
+
+</div>
+
+</div> <!--end search form -->
+
+<div ng-include="'app/templates/orderDetails.html'" ng-hide="!orden.detailsPopup"></div>

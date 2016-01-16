@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-30">
+		<div class="settings-menu">
+			<h1 class="settings-title">Menú</h1>
+			<ul class="menu">
+				<li ui-sref="app.settings.general"><i class="icon ion-gear-b"></i> General</li>
+				<li ui-sref="app.settings.account"><i class="icon ion-person"></i> Cuenta</li>
+				<li ui-sref="app.settings.languages"><i class="icon ion-person-stalker"></i> Idiomas</li>
+				<li ui-sref="app.settings.printers"><i class="icon ion-printer"></i> Impresoras</li>
+				<li ui-sref="app.settings.backup"><i class="icon ion-soup-can"></i> Respaldos</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-70">
+		<div class="settings-wrapper">
+			<div ui-view="settingsWrapper"></div>
+		</div>
+	</div>
+</div>

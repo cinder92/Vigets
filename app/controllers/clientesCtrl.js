@@ -5,13 +5,15 @@
 	clientesCtrl.$inject = [
 		'$rootScope',
 		'$state',
-		'$webSql'
+		'$webSql',
+		'SweetAlert'
 	]
 
 	function clientesCtrl(
 		$rootScope,
 		$state,
-		$webSql
+		$webSql,
+		SweetAlert
 	){
 		var vm = this;
 
@@ -21,9 +23,23 @@
 		vm.ctePhone;
 		vm.cteFacebook;
 		vm.cteTwitter;
+		vm.cteDir;
 		vm.catID;
 		vm.pageSize = 5;
 		vm.currentPage = 0;
+
+		function refreshFields(){
+			vm.cteName = "";
+			vm.cteAge = "";
+			vm.cteEmail = "";
+			vm.ctePhone = "";
+			vm.cteFacebook = "";
+			vm.cteTwitter = "";
+			vm.cteID = "";
+			vm.cteDir = ""
+
+		    vm.getAllCtes()
+		}
 
 		vm.getAllCtes = function(){
 			vm.ctes = [];
@@ -45,12 +61,12 @@
 				    	if(vm.ctes[i].id == index){
 				    		//vm.prodCat = vm.categorias[i].category
 						    vm.cteName = vm.ctes[i].name;
-						    vm.cteAge = vm.ctes[i].age;
-							vm.cteEmail = vm.ctes[i].email;
+						    vm.cteAge = (undefined == vm.ctes[i].age) ? '' : vm.ctes[i].age;
+							vm.cteEmail = (undefined == vm.ctes[i].email) ? '' : vm.ctes[i].email;
 							vm.ctePhone = vm.ctes[i].phone;
-							vm.cteFacebook = vm.ctes[i].facebook;
-							vm.cteTwitter = vm.ctes[i].twitter;
-						    
+							vm.cteFacebook = (undefined == vm.ctes[i].facebook) ? '' : vm.ctes[i].facebook;
+							vm.cteTwitter = (undefined == vm.ctes[i].twitter) ? '' : vm.ctes[i].twitter;
+						    vm.cteDir = vm.ctes[i].direccion;
 						    vm.cteID = vm.ctes[i].id
 				    	}
 				    }
@@ -60,7 +76,8 @@
 
 		vm.saveCte = function(){
 			if(vm.cteName != undefined && vm.cteName != ""
-				&& vm.ctePhone != undefined && vm.ctePhone != ""){
+				&& vm.ctePhone != undefined && vm.ctePhone != ""
+				&& vm.cteDir != undefined && vm.cteDir != ""){
 
 				var newCte = {
 					name : vm.cteName,
@@ -68,7 +85,8 @@
 					email : vm.cteEmail,
 					phone : vm.ctePhone,
 					facebook : vm.cteFacebook,
-					twitter : vm.cteTwitter
+					twitter : vm.cteTwitter,
+					direccion : vm.cteDir
 				}
 
 				//validar que se actualice el producto
@@ -86,18 +104,16 @@
 					})
 				}
 
-				vm.cteName = "";
-				vm.cteAge = "";
-				vm.cteEmail = "";
-				vm.ctePhone = "";
-				vm.cteFacebook = "";
-				vm.cteTwitter = "";
-				vm.cteID = "";
-
-			    vm.getAllCtes()
+				//refresh fields
+				refreshFields()
 
 			}else{
-				alert('Por favor escriba el nombre y el telefono del cliente')
+				SweetAlert.swal({
+					 title : "Oops!",
+					 text: 'Por favor escriba el nombre / teléfono / dirección',
+					 type: "warning"
+				})
+				//alert('Por favor escriba el nombre y el telefono del cliente')
 			}
 		}
 
@@ -105,20 +121,26 @@
 			//console.log(index)
 			
 			if(index != undefined && index > 0 && index != "" && index != null){
-				var conf = confirm('Deseas eliminar este cliente?')
 
-				if(conf){
-					
-				    vm.cteName = "";
-					vm.cteAge = "";
-					vm.cteEmail = "";
-					vm.ctePhone = "";
-					vm.cteFacebook = "";
-					vm.cteTwitter = "";
-					vm.cteID = "";
-					$rootScope.db.del("clientes", {"id": index})
-					vm.getAllCtes()
-				}
+				SweetAlert.swal({
+				   title: "Aviso",
+				   text: "¿Deseas eliminar este cliente?",
+				   type: "warning",
+				   showCancelButton: true,
+				   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
+				   cancelButtonText: "Cancelar",
+				   closeOnConfirm: false,
+				   closeOnCancel: false }, 
+				function(isConfirm){ 
+				   if (isConfirm) {
+					   	$rootScope.db.del("clientes", {"id": index})
+						//refresh fields
+						refreshFields()
+				      SweetAlert.swal("¡Borrado!", "El cliente ha sido eliminado", "success");
+				   } else {
+				      SweetAlert.swal("Cancelado", "El cliente no ha sido eliminado", "error");
+				   }
+				});
 				
 			}
 		}

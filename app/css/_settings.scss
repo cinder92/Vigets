@@ -1,0 +1,61 @@
+.settings-menu{
+	margin:10px;
+	
+	.settings-title{
+		color:$whiteText;
+		text-transform: uppercase;
+		text-align: center;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		padding:15px;
+		background: $greenLow;
+		margin:0;
+		font-size: 16px;
+	}
+
+	.menu{
+		margin:0;
+		padding:0;
+		list-style:none;
+
+		li{
+			@include transition(all 300ms ease-in-out);
+			background: $darkBlue2;
+			padding:15px;
+			color:$whiteText;
+			border-bottom: 1px solid #1f253d;
+			cursor: pointer;
+
+			i{
+				&:before{
+					@include transition(all 300ms ease-in-out);
+					color:$inactive;
+					font-size: 20px;
+				}
+
+				&.default{
+					float: right;
+					&:before{
+						color:$green !important;
+					}
+				}
+			}
+
+			&:last-child{
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
+				border-color: none;
+			}
+
+			&:hover{
+				background: $hoverMenu;
+
+				i{
+					&:before{
+						color:$whiteText;
+					}
+				}
+			}
+		}
+	}
+}
