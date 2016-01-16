@@ -15,6 +15,17 @@ Cuenta con los módulos de:
  - Catálogo de Categorías
  - Catálogo de Usuarios
  - Inicio de sesión
+ - Reportes
+  - Cliente que más compras ha realizado
+  - Ganancias del día
+  - Productos más vendidos
+ - Punto de venta
+ - Listado de órdenes
+ - Apartado de ajustes
+    - Respaldo de base de datos
+    - Importe de base de datos
+    - Impresoras intaladas en la computadora
+    - Envío de respaldo de base de datos por correo
 
 Cada uno de estos módulos incluye:
 
@@ -23,9 +34,18 @@ Cada uno de estos módulos incluye:
  - Formularios de registro y edición
 
 
-<img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.01.03.png?w=650">
-<img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.00.30.png?w=650">
-<img src="http://dantecervantes.com/wp-content/uploads/2015/07/Captura-de-pantalla-2015-07-11-a-las-21.01.36.png?w=650">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.12.35-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.12.51-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.13.04-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.13.27-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.13.35-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.13.43-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.13.50-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.13.58-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.14.08-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.14.20-p.m..png">
+<img src="http://dantecervantes.com/wp-content/uploads/2016/01/Captura-de-pantalla-2016-01-16-a-las-4.14.52-p.m..png">
+
 
 Desarrollador : <a href="http://dantecervantes.com" target="_blank">Dante Cervantes</a> 
 
