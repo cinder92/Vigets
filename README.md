@@ -7,7 +7,7 @@ Core : <a href="https://github.com/mafintosh/electron-prebuilt" target="_blank">
 <br>
 Lenguajes : Javascript, Node.js, Electron<br>
 Frameworks : <a href="https://angularjs.org/" target="_blank">Angular.js v 1.4.0</a><br>
-Manejador de base de datos : <a href="https://github.com/paulocaldeira17/angular-websql" target="_blank">webSq</a> <br><br>
+Manejador de base de datos : <a href="https://github.com/paulocaldeira17/angular-websql" target="_blank">webSql</a> <br><br>
 
 Cuenta con los módulos de:
  - Módulo de instalación (la primera vez que se usa, se debe registrar un usuario por default)
