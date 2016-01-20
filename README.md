@@ -5,7 +5,7 @@ Desarrollado con Html, Css, y Javascript.
 
 Core : <a href="https://github.com/mafintosh/electron-prebuilt" target="_blank">Electron</a>
 <br>
-Lenguajes : Javascript, Node.js, Electron<br>
+Lenguajes : Javascript<br>
 Frameworks : <a href="https://angularjs.org/" target="_blank">Angular.js v 1.4.0</a><br>
 Manejador de base de datos : <a href="https://github.com/paulocaldeira17/angular-websql" target="_blank">webSql</a> <br><br>
 
