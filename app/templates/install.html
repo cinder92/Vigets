@@ -1,0 +1,12 @@
+<ons-page class="relative" style="height:80vh">
+  <div class="login-form center">
+	<img src="app/img/logo.png" alt="Vigets" style="width:30%">
+	<h1 style="color:#fff;display:block;margin-top:-0.2em;">Vigets</h1>
+   <h3 style="color:#fff;display:block;font-size:13px">Bienvenido a Vigets, por favor cree un usuario para continuar</h3>
+    <input type="text" class="text-input--underbar" placeholder="Nombre" value=""  style="color:#fff" ng-model="install.credentials.userName">
+    <input type="email" class="text-input--underbar" placeholder="Email" value=""  style="color:#fff" ng-model="install.credentials.userMail">
+    <input type="password" class="text-input--underbar" placeholder="Password" value="" ng-model="install.credentials.userPass" style="color:#fff">
+    <ons-button modifier="large" ng-click="install.createAccount()"  class="button login-button">Create account</ons-button>
+  </div>
+
+</ons-page>

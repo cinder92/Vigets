@@ -7,7 +7,6 @@
 
 	function settingsCtrl(){
 		var _self = this
-
 		
 	}
 })()

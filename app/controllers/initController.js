@@ -7,7 +7,9 @@
 		'$webSql',
 		'$hotkey',
 		'$timeout',
-		'SweetAlert'
+		'SweetAlert',
+		'$compile',
+		'$scope'
 	]
 
 	function initController(
@@ -16,7 +18,9 @@
 		$webSql,
 		$hotkey,
 		$timeout,
-		SweetAlert
+		SweetAlert,
+		$compile,
+		$scope
 	){
 		var vm = this;
 
@@ -27,39 +31,44 @@
 		vm.newClientName
 		vm.newClientAddress
 
+
+
 		vm.login = function(){
 			//$rootScope.isLogin = true;
 			var success = false;
 				if(vm.userPass != undefined && vm.userPass != ""
 					&& vm.userMail != undefined && vm.userMail != ""){
 
-					//obtener todos los usuarios
-					$rootScope.db.selectAll("usuarios").then(function(results) {
-					  for(var i=0; i < results.rows.length; i++){
-					    vm.users.push(results.rows.item(i));
-					  }
 
-						for(var i = 0; i < vm.users.length; i++){
-					    	if(vm.users[i].email == vm.userMail && vm.users[i].password == vm.userPass){
-					    		success = true;
-					    		console.log(vm.users[i].name)
-					    	}else{
-					    		success = false;
-					    		console.log('error')
-					    	}
-					    }
 
-					    if(success){
-					    	//console.log('here we are')
-					    	vm.userMail = "";
+					$rootScope.db.select("usuarios", {
+					  "email": {
+					    "value":vm.userMail,
+					    "union":'AND'
+					  },
+					  "password":vm.userPass
+					}).then(function(results) {
+					  
+						if(results.rows.length > 0){
+						   $rootScope.current_user_id = results.rows.item(0).id
+
+						    vm.userMail = "";
 							vm.userPass = "";
 					    	$rootScope.isLogin = true;
+					    	//vm.startIntroAtlogin = true
 					    	$state.go('app.dashboard')
-					    }else{
+					    	vm.startIntroAtlogin()
+						}else{
 					    	$rootScope.isLogin = false;
-					    	console.log('Oops!')
+					    	//console.log('Oops!')
+					    	SweetAlert.swal({
+								 title : "Oops!",
+								 text: 'Usuario ó contraseña incorrectos',
+								 type: "error"
+							})
 					    }
 
+					  
 					})
 				
 
@@ -72,6 +81,36 @@
 					//alert('Por favor escribe tu usuario y contraseña')
 				}
 			//$state.go('app.dashboard')
+		}
+
+		vm.startIntroAtlogin = function(){
+			angular.element(document.getElementById('spaceforIntroBtn')).append($compile("<div><button ng-click='startTour();' style='display:none' on-load-clicker>startIntro</button></div>")($scope));
+		}
+
+		vm.setTourSettings = function(){
+			SweetAlert.swal({
+			   title: "Aviso",
+			   text: "¿Deseas reproducir la introducción cada vez que inicies?",
+			   type: "warning",
+			   showCancelButton: true,
+			   confirmButtonColor: "#DD6B55",confirmButtonText: "Si",
+			   cancelButtonText: "No",
+			   closeOnConfirm: true,
+			   closeOnCancel: true }, 
+			function(isConfirm){ 
+			   var vigets_settings = {
+		   	  	 user_id : $rootScope.current_user_id,
+		   	  	 ajustes : []
+		   	   }
+			   if (isConfirm) {
+			   	  vigets_settings.ajustes.push({always_show_intro : false})
+			      $rootScope.db.insert('ajustes',vigets_settings)
+			   }else{
+			   	 vigets_settings.ajustes.push({always_show_intro : true})
+			      $rootScope.db.insert('ajustes',vigets_settings)
+			   }
+			});
+
 		}
 
 		vm.logout = function(){

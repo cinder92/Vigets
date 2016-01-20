@@ -16,56 +16,58 @@
   </div>
 </div>
 
+<div id="spaceforIntroBtn"></div>
 
-<div class="navigation-bar">
+
+<div class="navigation-bar" ng-intro-options="intro" ng-intro-autostart="startIntroAtlogin" ng-intro-method="startTour" ng-intro-oncomplete="init.setTourSettings" ng-intro-onexit="init.setTourSettings">
   <div class="navigation-bar__center navigation-bar__title" style="color:#ffffff; background-color:#394264;">Vigets</div> 
 </div>
 
 <div ng-hide="!isLogin" style="margin:5px;border-radius:5px">
 	<div class="tab-bar tab-bar--top tab-bar--top-border">
-	  <label analytics-on="click" analytics-event="Productos" analytics-category="Comandos" ui-sref="app.dashboard" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active">
+	  <label id="produtosIntro" analytics-on="click" analytics-event="Productos" analytics-category="Comandos" ui-sref="app.dashboard" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active">
 	    <input type="radio" name="top-tab-bar-b" >
 	    <button  class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-heart"></i> Productos
 	    </button>
 	  </label>
 
-	  <label ui-sref="app.categorias" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Categorias" analytics-category="Comandos">
+	  <label id="categoriasIntro" ui-sref="app.categorias" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Categorias" analytics-category="Comandos">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button  class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-pin"></i> Categorías
 	    </button>
 	  </label>
 
-	  <label ui-sref="app.clientes" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Clientes" analytics-category="Comandos">
+	  <label id="clientesIntro" ui-sref="app.clientes" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Clientes" analytics-category="Comandos">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-person"></i> Clientes
 	    </button>
 	  </label>
 
-	  <label ui-sref="app.reportes" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Reportes" analytics-category="Comandos">
+	  <label id="reportesIntro" ui-sref="app.reportes" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Reportes" analytics-category="Comandos">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-stats-bars"></i> Reportes
 	    </button>
 	  </label>
 
-	  <label ui-sref="app.ordenes" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Ordenes" analytics-category="Comandos">
+	  <label id="ordenesIntro" ui-sref="app.ordenes" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Ordenes" analytics-category="Comandos">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-clipboard"></i> Órdenes
 	    </button>
 	  </label>
 
-	  <label ui-sref="app.usuarios" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Usuarios" analytics-category="Comandos">
+	  <label id="usuariosIntro" ui-sref="app.usuarios" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active" analytics-on="click" analytics-event="Usuarios" analytics-category="Comandos">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-person"></i> Usuarios
 	    </button>
 	  </label>
 
-	  <label ui-sref="app.settings.general" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active">
+	  <label id="ajustesIntro" ui-sref="app.settings.general" class="tab-bar__item tab-bar--top-border__item" ui-sref-active="active">
 	    <input type="radio" name="top-tab-bar-b">
 	    <button class="tab-bar__button tab-bar--top-border__button">
 	      <i class="icon ion-gear-a"></i> Ajustes

@@ -79,6 +79,8 @@
 					})
 				}
 
+				localStorage.setItem('have_users',"true")
+
 				vm.userName = "";
 				vm.userEmail = "";
 				vm.userPass = "";
@@ -100,32 +102,74 @@
 			//console.log(index)
 			
 			if(index != undefined && index > 0 && index != "" && index != null){
-				
-				SweetAlert.swal({
-				   title: "Aviso",
-				   text: "¿Deseas eliminar este usuario?",
-				   type: "warning",
-				   showCancelButton: true,
-				   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
-				   cancelButtonText: "Cancelar",
-				   closeOnConfirm: false,
-				   closeOnCancel: false }, 
-				function(isConfirm){ 
-				   if (isConfirm) {
-					   	vm.userName = "";
-						vm.userEmail = "";
-						vm.userPass = "";
-						vm.userID = "";
-						$rootScope.db.del("usuarios", {"id": index})
-					 	vm.getAllUsers()
-				      SweetAlert.swal("¡Borrado!", "El usuario ha sido eliminado", "success");
-				   } else {
-				      SweetAlert.swal("Cancelado", "El usuario no ha sido eliminado", "error");
-				   }
-				});
+
+				//si es el último usuario del sistema
+				$rootScope.db.selectAll("usuarios").then(function(results) {
+				  if(results.rows.length == 1){
+				  	  vm.borrarUltimoUsuario(index)
+				  }else{
+				  	  vm.borrarUsuarioUnico(index)
+				  }
+				})
+
+				//para próximos modulos tomar en cuenta el id del usuario
 
 			}
 		}
+
+		vm.borrarUltimoUsuario = function(index){
+			SweetAlert.swal({
+			   title: "Aviso",
+			   text: "Si eliminas el ULTIMO usuario, no podrás consultar su información nuevamente, ¿quieres continuar?",
+			   type: "warning",
+			   showCancelButton: true,
+			   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
+			   cancelButtonText: "Cancelar",
+			   closeOnConfirm: false,
+			   closeOnCancel: false }, 
+			function(isConfirm){ 
+			   if (isConfirm) {
+				   	vm.userName = "";
+					vm.userEmail = "";
+					vm.userPass = "";
+					vm.userID = "";
+					$rootScope.db.del("usuarios", {"id": index})
+				 	//vm.getAllUsers()
+			      //SweetAlert.swal("¡Borrado!", "El usuario ha sido eliminado", "success");
+			      	localStorage.setItem('have_users',"false")
+			      	$state.go('app.install')
+			   } else {
+			      SweetAlert.swal("Cancelado", "El usuario no ha sido eliminado", "error");
+			   }
+			});
+		}
+
+		vm.borrarUsuarioUnico = function(index){
+			SweetAlert.swal({
+			   title: "Aviso",
+			   text: "¿Deseas eliminar este usuario?",
+			   type: "warning",
+			   showCancelButton: true,
+			   confirmButtonColor: "#DD6B55",confirmButtonText: "Si, borrar!",
+			   cancelButtonText: "Cancelar",
+			   closeOnConfirm: false,
+			   closeOnCancel: false }, 
+			function(isConfirm){ 
+			   if (isConfirm) {
+				   	vm.userName = "";
+					vm.userEmail = "";
+					vm.userPass = "";
+					vm.userID = "";
+					$rootScope.db.del("usuarios", {"id": index})
+				 	vm.getAllUsers()
+				 	localStorage.setItem('have_users',"true")
+			      SweetAlert.swal("¡Borrado!", "El usuario ha sido eliminado", "success");
+			   } else {
+			      SweetAlert.swal("Cancelado", "El usuario no ha sido eliminado", "error");
+			   }
+			});
+		}
+
 
 		 vm.getAllUsers()
 	}

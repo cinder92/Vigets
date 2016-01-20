@@ -18,7 +18,8 @@ angular.module('Vigets',[
   'angulartics.google.analytics',
   '720kb.datepicker',
   'oitozero.ngSweetAlert',
-  'ng-file-model'
+  'ng-file-model',
+  'angular-intro'
 ])
 
 .run(function($rootScope,$webSql,$timeout){
@@ -107,6 +108,23 @@ angular.module('Vigets',[
       "type": "TEXT",
       "null": "NOT NULL"
       //"default": "CURRENT_TIMESTAMP" // default value
+    }
+  })
+
+  $rootScope.db.createTable('ajustes', {
+    "id":{
+      "type": "INTEGER",
+      "null": "NOT NULL", // default is "NULL" (if not defined)
+      "primary": true, // primary
+      "auto_increment": true // auto increment
+    },
+    "ajustes":{
+      "type": "TEXT",
+      "null": "NOT NULL"
+    },
+    "user_id":{
+      "type" : 'INTEGER',
+      "null" : "NOT NULL"
     }
   })
 
@@ -226,11 +244,59 @@ angular.module('Vigets',[
     var window = BrowserWindow.getFocusedWindow();
     window.close();
   }
+
+  $rootScope.intro = {
+      steps:[
+        {
+            element: '#produtosIntro',
+            intro: "Esta es la sección de productos, aquí tienes el catálogo y la información de cada producto en stock",
+        },
+        {
+            element: '#categoriasIntro',
+            intro: "En esta sección encontrarás las categorías a las que están ligadas los productos"
+        },
+        {
+          element : '#clientesIntro',
+          intro : 'En el módulo de clientes, puedes revisar cuantos clientes tienes hasta ahora, editarlos, añadir nuevos y exportarlos en distintos formatos para su posterior uso.'
+        },
+        {
+          element : '#reportesIntro',
+          intro : 'Los reportes son los que te indican cuantas ventas llevas hasta ahora, el cliente que más compras realiza y las ganancias del día de hoy'
+        },
+        {
+          element : '#ordenesIntro',
+          intro : 'El listado de órdenes / pedidos, te da un detalle más avanzado de las mismas'
+        },{
+          element : '#usuariosIntro',
+          intro : 'Los usuarios son los que podrán acceder a Vigets, ¡agrega cuantos quieras!'
+        },{
+          element : '#ajustesIntro',
+          intro : 'Aquí podrás visualizar las impresoras conectadas a tu computadora, respaldar la base de datos y muchas otras cosas!'
+        },
+        {
+          element : '#nuevaOrdenIntro',
+          intro : "Con este botón puedes realizar una orden de compra",
+          position : 'top'
+        }
+      ],
+      showBullets : false,
+      nextLabel : 'Siguiente',
+      prevLabel : 'Anterior',
+      skipLabel : 'Saltar intro',
+      doneLabel : 'Terminar',
+      exitOnEsc : false,
+      showStepNumbers : false,
+      disableInteraction : true
+    }
+
+  $rootScope.startIntroAtlogin = false
+
+
+
   
 })
 
-.config(function($stateProvider, $urlRouterProvider, $analyticsProvider) {
-
+.config(function($httpProvider,$stateProvider, $urlRouterProvider, $analyticsProvider) {
   //analytics
   // turn off automatic tracking
   $analyticsProvider.virtualPageviews(false);
@@ -249,6 +315,16 @@ angular.module('Vigets',[
     views: {
       'menuContent': {
         templateUrl: "app/templates/sesion.html"
+      }
+    }
+  })
+
+  .state('app.install', {
+    url: "/install",
+    views: {
+      'menuContent': {
+        templateUrl: "app/templates/install.html",
+        controller : "installCtrl as install"
       }
     }
   })
@@ -356,7 +432,21 @@ angular.module('Vigets',[
     }
   })
 
+ 
+
+    //hasta que no se encuentre una forma de utulizar la base de datos
+    //en esta sección, se utilizará localStorage
+
+    var localUsers = JSON.parse(localStorage.getItem('have_users'))
+    console.log(localUsers)
+    
+    // if none of the above states are matched, use this as the fallback
+    //undefined != localUsers && null != localUsers && localUsers == "true"
+    if(undefined != localUsers && null != localUsers && localUsers == true){
+       $urlRouterProvider.otherwise('/app/home');
+    }else{
+       $urlRouterProvider.otherwise('/app/install');
+    }
+
   
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
 });
